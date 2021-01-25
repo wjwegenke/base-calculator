@@ -11,10 +11,14 @@ export default function App() {
     console.log(value);
   };
 
+  const onKeyFunctionPress = (e, value) => {
+    console.log(value);
+  }
+
   return (
     <View style={styles.container}>
-      <Display />
-      <Keyboard onKeypadPress={onKeypadPress} base={base} />
+      <Display style={styles.display}/>
+      <Keyboard style={styles.keyboard} onKeypadPress={onKeypadPress} onKeyFunctionPress={onKeyFunctionPress} base={base} />
     </View>
   );
 }
@@ -27,4 +31,10 @@ const styles = {
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+  display: {
+    flex: 1,
+  },
+  keyboard: {
+    height: 336,
+  }
 };

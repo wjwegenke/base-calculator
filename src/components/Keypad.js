@@ -24,15 +24,15 @@ export default function Kaypad(props) {
         },
     };
 
+    const onKeyPress = (e, value) => {
+        props.onKeyPress(e, value);
+    };
+
     let keysJSX = [];
     for (let i = 0; i < props.base; i++) {
         keysJSX.push((<Key key={i} text={i} value={i} onPress={onKeyPress} style={styles.key} />));
     }
     keysJSX.push((<Key key="." text="." value="." onPress={onKeyPress} style={styles.key} />));
-
-    const onKeyPress = (e, value) => {
-        props.onKeyPress(e, value);
-    };
 
     return (
         <ScrollView style={styles.keypad}>

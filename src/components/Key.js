@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 export default function Key(props) {
     console.log(props);
     const styles = {
         key: {
-            height: 60,
-            width: 60,
+            height: 50,
+            width: 50,
             margin: 3,
-            borderRadius: 30,
+            borderRadius: 25,
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#444',
@@ -22,9 +22,13 @@ export default function Key(props) {
         }
     };
 
+    const onPress = (e) => {
+        props.onPress(e, props.value);
+    }
+
     return (
-        <View style={styles.key}>
+        <Pressable style={styles.key} onPress={onPress}>
             <Text style={styles.text}>{props.text}</Text>
-        </View>
+        </Pressable>
     );
 }

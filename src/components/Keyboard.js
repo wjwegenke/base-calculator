@@ -7,7 +7,6 @@ export default function Keyboard(props) {
 
     const styles = {
         keyboard: {
-            flex: 1,
             flexDirection: 'row',
             alignContent: 'stretch',
             backgroundColor: 'green',
@@ -21,6 +20,7 @@ export default function Keyboard(props) {
         functions: {
             height: 66,
             flexDirection: 'row',
+            alignItems: 'center',
             backgroundColor: 'teal',
         },
         keypad: {
@@ -29,6 +29,7 @@ export default function Keyboard(props) {
         },
         operators: {
             width: 66,
+            alignItems: 'center',
             backgroundColor: 'aqua',
         },
     };
