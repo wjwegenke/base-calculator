@@ -5,7 +5,7 @@ import Display from './components/Display';
 import Keyboard from './components/Keyboard';
 
 export default function App() {
-  const [base, setBase] = useState(10);
+  const [base, setBase] = useState(36);
 
   const onKeypadPress = (e, value) => {
     console.log(value);
@@ -35,6 +35,6 @@ const styles = {
     flex: 1,
   },
   keyboard: {
-    height: 346,
+    height: 406,
   }
 };

@@ -2,7 +2,7 @@ import peg from 'pegjs';
 import { grammar } from '../files/MathGrammar.json';
 
 const precision = 12;
-const pegParser = peg.generate(grammer);
+const pegParser = peg.generate(grammar);
 
 const buildExpression = (str) => {
     expression = pegParser.parse(str);

@@ -5,10 +5,10 @@ export default function Key(props) {
     console.log(props);
     const styles = {
         key: {
-            height: 50,
-            width: 50,
+            height: 60,
+            width: 60,
             margin: 3,
-            borderRadius: 25,
+            borderRadius: 30,
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#444',
@@ -27,7 +27,12 @@ export default function Key(props) {
     }
 
     return (
-        <Pressable style={styles.key} onPress={onPress}>
+        <Pressable
+            style={styles.key}
+            android_ripple={{color: 'rgba(150,150,150,0.4)', borderless: true, radius: 30}}
+            hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
+            pressRetentionOffset={{top: 20, bottom: 20, left: 20, right: 20}}
+            onPress={onPress}>
             <Text style={styles.text}>{props.text}</Text>
         </Pressable>
     );

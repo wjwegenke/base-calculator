@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import Key from './Key';
+import { convertBase } from '../scripts/calculator';
 
 export default function Kaypad(props) {
     
@@ -20,9 +21,6 @@ export default function Kaypad(props) {
             flexDirection: 'row',
             backgroundColor: 'yellow',
         },
-        key: {
-            margin: 3,
-        },
     };
 
     const onKeyPress = (e, value) => {
@@ -31,9 +29,10 @@ export default function Kaypad(props) {
 
     let keysJSX = [];
     for (let i = 0; i < props.base; i++) {
-        keysJSX.push((<Key key={i} text={i} value={i} onPress={onKeyPress} style={styles.key} />));
+        const d = convertBase(i.toString(), 10, props.base);
+        keysJSX.push((<Key key={i} text={d} value={d} onPress={onKeyPress} />));
     }
-    keysJSX.push((<Key key="." text="." value="." onPress={onKeyPress} style={styles.key} />));
+    keysJSX.push((<Key key="." text="." value="." onPress={onKeyPress} />));
 
     return (
         <ScrollView style={styles.keypad}>

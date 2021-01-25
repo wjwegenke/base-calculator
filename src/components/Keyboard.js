@@ -18,7 +18,7 @@ export default function Keyboard(props) {
             alignContent: 'stretch',
         },
         functions: {
-            height: 66,
+            height: 76,
             padding: 5,
             paddingRight: 0,
             flexDirection: 'row',
@@ -30,7 +30,7 @@ export default function Keyboard(props) {
             backgroundColor: 'gray',
         },
         operators: {
-            width: 66,
+            width: 76,
             padding: 5,
             alignItems: 'center',
             backgroundColor: 'aqua',
