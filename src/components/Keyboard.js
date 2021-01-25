@@ -19,6 +19,8 @@ export default function Keyboard(props) {
         },
         functions: {
             height: 66,
+            padding: 5,
+            paddingRight: 0,
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: 'teal',
@@ -29,6 +31,7 @@ export default function Keyboard(props) {
         },
         operators: {
             width: 66,
+            padding: 5,
             alignItems: 'center',
             backgroundColor: 'aqua',
         },

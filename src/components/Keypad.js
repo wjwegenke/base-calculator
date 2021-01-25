@@ -14,6 +14,7 @@ export default function Kaypad(props) {
         },
         keys: {
             flex: 1,
+            padding: 5,
             justifyContent: 'center',
             flexWrap: 'wrap',
             flexDirection: 'row',

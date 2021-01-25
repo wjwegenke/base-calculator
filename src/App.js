@@ -35,6 +35,6 @@ const styles = {
     flex: 1,
   },
   keyboard: {
-    height: 336,
+    height: 346,
   }
 };
