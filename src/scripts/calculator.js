@@ -10,7 +10,6 @@ const buildExpression = (str) => {
         const expression = pegParser.parse(str);
         return expression;
     } catch (ex) {
-        console.log(ex);
         return 'Parse Error';
     }
 };
@@ -72,7 +71,7 @@ export const calculate = (str, base) => {
 
 export const convertBase = (str, fromBase, toBase) => {
     if (!str) return '';
-    
+
     const baseTenNum = parseBaseFloat(str, fromBase);
     const newNumberStr = roundPrecision(baseTenNum).toString(toBase).toUpperCase();
     return newNumberStr;
