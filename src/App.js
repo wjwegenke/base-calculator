@@ -14,11 +14,7 @@ export default function App() {
 
   useEffect(() => {
     setResult(calculate(expression, base));
-  }, [expression]);
-
-  const onKeypadPress = (e, value) => {
-    setExpression(expression + value);
-  };
+  }, [expression, base]);
 
   const onKeyPress = (e, value) => {
     switch (value) {
@@ -48,7 +44,8 @@ export default function App() {
         result={result}
         base={base}
         history={history}
-        setBase={setBase}/>
+        setBase={setBase}
+        setExpression={setExpression}/>
       <Keyboard
         style={styles.keyboard}
         onKeyPress={onKeyPress}
