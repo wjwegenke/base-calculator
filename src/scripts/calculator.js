@@ -53,7 +53,7 @@ const calculateExpression = (expression, base) => {
     else if (expression === 'e')
         return Math.E.toString(base).toUpperCase();
     else
-        return expression;
+        return roundPrecision(parseBaseFloat(expression, base)).toString(base).toUpperCase();
 };
 
 export const calculate = (str, base) => {

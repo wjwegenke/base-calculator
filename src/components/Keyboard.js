@@ -9,7 +9,7 @@ export default function Keyboard(props) {
         keyboard: {
             flexDirection: 'row',
             alignContent: 'stretch',
-            backgroundColor: 'green',
+            backgroundColor: '#00676a',
             ...props.style,
             ...(props.styles ? props.styles.keyboard : null),
         },
@@ -23,17 +23,16 @@ export default function Keyboard(props) {
             paddingRight: 0,
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: 'teal',
         },
         keypad: {
             flex: 1,
-            backgroundColor: 'gray',
+            borderTopRightRadius: 10,
+            backgroundColor: '#3a3a3a'
         },
         operators: {
             width: 76,
             padding: 5,
             alignItems: 'center',
-            backgroundColor: 'aqua',
         },
     };
 

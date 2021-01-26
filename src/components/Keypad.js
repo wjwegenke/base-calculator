@@ -9,7 +9,6 @@ export default function Kaypad(props) {
         keypad: {
             flex: 1,
             alignContent: 'stretch',
-            backgroundColor: 'red',
             ...props.style,
             ...(props.styles ? props.styles.keypad : null),
         },
@@ -19,7 +18,6 @@ export default function Kaypad(props) {
             justifyContent: 'center',
             flexWrap: 'wrap',
             flexDirection: 'row',
-            backgroundColor: 'yellow',
         },
     };
 
