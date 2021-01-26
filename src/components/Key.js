@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable, Text } from 'react-native';
 
 export default function Key(props) {
-    console.log(props);
     const styles = {
         key: {
             height: 60,
@@ -26,13 +25,18 @@ export default function Key(props) {
         props.onPress(e, props.value);
     }
 
+    const onLongPress = (e) => {
+        props.onLongPress(e, props.longValue);
+    }
+
     return (
         <Pressable
             style={styles.key}
-            android_ripple={{color: 'rgba(150,150,150,0.4)', borderless: true, radius: 30}}
+            android_ripple={{color: 'rgba(150,150,150,0.4)', borderless: true, radius: styles.key.borderRadius}}
             hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
             pressRetentionOffset={{top: 20, bottom: 20, left: 20, right: 20}}
-            onPress={onPress}>
+            onPress={onPress}
+            onLongPress={props.onLongPress ? onLongPress : null}>
             <Text style={styles.text}>{props.text}</Text>
         </Pressable>
     );

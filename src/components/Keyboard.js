@@ -37,19 +37,15 @@ export default function Keyboard(props) {
         },
     };
 
-    const onKeyFunctionPress = (e, value) => {
-        props.onKeyFunctionPress(e, value);
-    }
-
     const onKeyPress = (e, value) => {
-        props.onKeypadPress(e, value);
+        props.onKeyPress(e, value);
     }
 
     return (
         <View style={styles.keyboard}>
             <View style={styles.left}>
                 <View style={styles.functions}>
-                    <Key text="DEL" value="del" styles={{text: {color: 'red'}}} onPress={onKeyFunctionPress} />
+                    <Key text="DEL" value="del" longValue="clear" styles={{text: {color: 'red'}}} onPress={onKeyPress} onLongPress={onKeyPress} />
                     <Key text="π" value="π" styles={{text: {color: 'orange'}}} onPress={onKeyPress} />
                     <Key text="(" value="(" onPress={onKeyPress} />
                     <Key text=")" value=")" onPress={onKeyPress} />

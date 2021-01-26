@@ -11,9 +11,7 @@ additive
 multiplicative
   = first:exponent rest:(('*' / '%' / '/' / '') exponent)+ {
     return rest.reduce(function(memo, curr) {
-        if (curr.length === 0)
-            return {operator: '*', left: memo, right: curr[0]};
-        return {operator: curr[0], left: memo, right: curr[1]};
+        return {operator: curr[0] || '*', left: memo, right: curr[1]};
     }, first);
   }
   / exponent
@@ -31,6 +29,6 @@ primary
   / '(' additive:additive ')' { return additive; }
 
 number
-  = digits:[0-9A-Z]+ { return digits.join(''); }
-  / digits:[0-9A-Z]+ point:'.' decimals:[0-9A-Z]+ { return digits.join('') + point + decimals.join(''); }
+  = digits:[0-9A-Z]+ point:'.' decimals:[0-9A-Z]+ { return digits.join('') + point + decimals.join(''); }
+  / digits:[0-9A-Z]+ { return digits.join(''); }
   / symbol:[eπ] { return symbol }

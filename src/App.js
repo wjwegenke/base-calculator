@@ -1,24 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import Constants from 'expo-constants'
 import Display from './components/Display';
 import Keyboard from './components/Keyboard';
+import { calculate } from './scripts/calculator';
+import { setStatusBarHidden } from 'expo-status-bar';
 
 export default function App() {
-  const [base, setBase] = useState(36);
+  const [base, setBase] = useState(16);
+  const [expression, setExpression] = useState('');
+  const [result, setResult] = useState('');
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    setResult(calculate(expression, base));
+  }, [expression]);
 
   const onKeypadPress = (e, value) => {
-    console.log(value);
+    setExpression(expression + value);
   };
 
-  const onKeyFunctionPress = (e, value) => {
-    console.log(value);
+  const onKeyPress = (e, value) => {
+    switch (value) {
+      case 'del':
+        setExpression(expression.slice(0, -1));
+        break;
+      case 'clear':
+        setExpression('');
+        break;
+      case '=':
+        if (result && !result.includes('Error')) {
+          setHistory([...history, {expression: expression, result: result, base: base}]);
+          setExpression(result);
+        }
+        break;
+      default:
+        setExpression(expression + value);
+        break;
+    }
   }
 
   return (
     <View style={styles.container}>
-      <Display style={styles.display}/>
-      <Keyboard style={styles.keyboard} onKeypadPress={onKeypadPress} onKeyFunctionPress={onKeyFunctionPress} base={base} />
+      <Display
+        style={styles.display}
+        expression={expression}
+        result={result}
+        base={base}
+        history={history}
+        setBase={setBase}/>
+      <Keyboard
+        style={styles.keyboard}
+        onKeyPress={onKeyPress}
+        base={base} />
     </View>
   );
 }

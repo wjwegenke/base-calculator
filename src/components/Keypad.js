@@ -23,6 +23,17 @@ export default function Kaypad(props) {
         },
     };
 
+    const keyStyles = {
+        key: {
+            height: 70,
+            width: 70,
+            borderRadius: 35,
+        },
+        keyText: {
+            fontSize: 32,
+        },
+    };
+
     const onKeyPress = (e, value) => {
         props.onKeyPress(e, value);
     };
@@ -30,9 +41,9 @@ export default function Kaypad(props) {
     let keysJSX = [];
     for (let i = 0; i < props.base; i++) {
         const d = convertBase(i.toString(), 10, props.base);
-        keysJSX.push((<Key key={i} text={d} value={d} onPress={onKeyPress} />));
+        keysJSX.push((<Key key={i} text={d} value={d} styles={keyStyles} onPress={onKeyPress} />));
     }
-    keysJSX.push((<Key key="." text="." value="." onPress={onKeyPress} />));
+    keysJSX.push((<Key key="." text="." value="." styles={keyStyles} onPress={onKeyPress} />));
 
     return (
         <ScrollView style={styles.keypad}>
