@@ -9,7 +9,7 @@ additive
   / multiplicative
 
 multiplicative
-  = first:exponent rest:(('*' / '%' / '/' / '') exponent)+ {
+  = first:exponent rest:(('*' / '%' / '/' / !'-') exponent)+ {
     return rest.reduce(function(memo, curr) {
         return {operator: curr[0] || '*', left: memo, right: curr[1]};
     }, first);
@@ -29,6 +29,6 @@ primary
   / '(' additive:additive ')' { return additive; }
 
 number
-  = digits:[0-9A-Z]+ point:'.' decimals:[0-9A-Z]+ { return digits.join('') + point + decimals.join(''); }
-  / digits:[0-9A-Z]+ { return digits.join(''); }
-  / symbol:[eπ] { return symbol }
+  = negative:'-'? digits:[0-9A-Z]* point:'.' decimals:[0-9A-Z]+ { return (negative || '') + (digits.length ? digits.join('') : '0') + point + decimals.join(''); }
+  / negative:'-'? digits:[0-9A-Z]+ { return (negative || '') + digits.join(''); }
+  / negative:'-'? symbol:[eπ] { return (negative || '') + symbol }

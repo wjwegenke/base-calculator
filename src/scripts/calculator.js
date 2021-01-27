@@ -4,6 +4,9 @@ import { grammar } from '../files/MathGrammar.json';
 const precision = 12;
 const pegParser = peg.generate(grammar);
 
+export const allDigits = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E',
+    'F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
 const buildExpression = (str) => {
     try {
         if (!str) return '';
@@ -20,40 +23,58 @@ const roundPrecision = (num) => {
 
 //Convert string to base 10 float
 const parseBaseFloat = (str, radix) => {
+    const baseDigits = allDigits.slice(0, radix + 1);
+    
+    for (const c of str) {
+        if (!baseDigits.includes(c) && c !== '.' && c !== '-') return NaN;
+    }
     var parts = str.split(".");
     if (parts.length > 1)
     {
-        return roundPrecision(parseInt(parts[0], radix) + parseInt(parts[1], radix) / Math.pow(radix, parts[1].length));
+        const left = parseInt(parts[0], radix);
+        const right = parseInt(parts[1], radix) / Math.pow(radix, parts[1].length) * (str[0] === '-' ? -1 : 1);
+        return left + right;
     }
     return roundPrecision(parseInt(parts[0], radix));
 }
 
 const calculateExpression = (expression, base) => {
+    let result = 0;
     if (typeof expression === 'object') {
         const left = parseBaseFloat(calculateExpression(expression.left, base), base);
         const right = parseBaseFloat(calculateExpression(expression.right, base), base);
-
+        
         switch (expression.operator) {
             case '^':
-                return roundPrecision(Math.pow(left, right)).toString(base).toUpperCase();
+                result = Math.pow(left, right);
+                break;
             case '*':
-                return roundPrecision(left * right).toString(base).toUpperCase();
+                result = left * right;
+                break;
             case '%':
-                return roundPrecision(left % right).toString(base).toUpperCase();
+                result = left % right;
+                break;
             case '/':
-                return roundPrecision(left / right).toString(base).toUpperCase();
+                result = left / right;
+                break;
             case '+':
-                return roundPrecision(left + right).toString(base).toUpperCase();
+                result = left + right;
+                break;
             case '-':
-                return roundPrecision(left - right).toString(base).toUpperCase();
+                result = left - right;
+                break;
         }
 
-    } else if (expression === 'π')
-        return Math.PI.toString(base).toUpperCase();
-    else if (expression === 'e')
-        return Math.E.toString(base).toUpperCase();
+    } else if (expression === 'π' || expression === '-π')
+        result = Math.PI * (expression[0] === '-' ? -1 : 1);
+    else if (expression === 'e' || expression === '-e')
+        result = Math.E * (expression[0] === '-' ? -1 : 1);
     else
-        return roundPrecision(parseBaseFloat(expression, base)).toString(base).toUpperCase();
+        result = parseBaseFloat(expression, base);
+
+    if (isNaN(result)) return 'NaN';
+    
+    return roundPrecision(result).toString(base).toUpperCase();
 };
 
 export const calculate = (str, base) => {
@@ -62,6 +83,8 @@ export const calculate = (str, base) => {
 
         str = str.replace(/ /g, ''); //Get rid of whitespace
         const expression = buildExpression(str);
+        if (expression === 'Parse Error') return expression;
+        
         const result = calculateExpression(expression, base);
         return result;
     } catch (ex) {

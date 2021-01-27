@@ -7,7 +7,7 @@ import { calculate } from './scripts/calculator';
 import { setStatusBarHidden } from 'expo-status-bar';
 
 export default function App() {
-  const [base, setBase] = useState(16);
+  const [base, setBase] = useState(10);
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState('');
   const [history, setHistory] = useState([]);
@@ -25,7 +25,7 @@ export default function App() {
         setExpression('');
         break;
       case '=':
-        if (result && !result.includes('Error')) {
+        if (result && !result.includes('Error') && result !== 'NaN') {
           setHistory([...history, {expression: expression, result: result, base: base}]);
           setExpression(result);
         }
@@ -45,7 +45,8 @@ export default function App() {
         base={base}
         history={history}
         setBase={setBase}
-        setExpression={setExpression}/>
+        setExpression={setExpression}
+        setHistory={setHistory}/>
       <Keyboard
         style={styles.keyboard}
         onKeyPress={onKeyPress}
