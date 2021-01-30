@@ -44,6 +44,9 @@ export default function Functions(props) {
                 <Key text="π" value="π" styles={keyStyles} onPress={onKeyPress} />
                 <Key text="e" value="e" styles={keyStyles} onPress={onKeyPress} />
                 <Key text="%" value="%" styles={keyStyles} onPress={onKeyPress} />
+                <Key text="sin" value="sin(" styles={keyStyles} onPress={onKeyPress} />
+                <Key text="cos" value="cos(" styles={keyStyles} onPress={onKeyPress} />
+                <Key text="tan" value="tan(" styles={keyStyles} onPress={onKeyPress} />
             </View>
         </ScrollView>
     );

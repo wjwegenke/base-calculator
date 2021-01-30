@@ -10,6 +10,7 @@ export default function App() {
   const [base, setBase] = useState(10);
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState('');
+  const [historyVisible, setHistoryVisible] = useState(false);
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -44,9 +45,11 @@ export default function App() {
         result={result}
         base={base}
         history={history}
+        historyVisible={historyVisible}
         setBase={setBase}
         setExpression={setExpression}
-        setHistory={setHistory}/>
+        setHistory={setHistory}
+        setHistoryVisible={setHistoryVisible}/>
       <Keyboard
         style={styles.keyboard}
         onKeyPress={onKeyPress}

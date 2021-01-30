@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, Vibration } from 'react-native';
 
 export default function Key(props) {
     const styles = {
@@ -22,10 +22,12 @@ export default function Key(props) {
     };
 
     const onPress = (e) => {
+        Vibration.vibrate(1);
         props.onPress(e, props.value);
     }
 
     const onLongPress = (e) => {
+        Vibration.vibrate(10);
         props.onLongPress(e, props.longValue);
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, Vibration } from 'react-native';
 
 export default function History(props) {
     console.log(props.item);
@@ -24,10 +24,12 @@ export default function History(props) {
     };
 
     const onPress = (e) => {
+        Vibration.vibrate(1);
         props.onPress(e, props.item);
     };
 
     const onLongPress = (e) => {
+        Vibration.vibrate(10);
         props.onLongPress(e, props.item);
     }
 

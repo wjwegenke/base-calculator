@@ -10,7 +10,6 @@ import { Picker } from '@react-native-picker/picker';
 export default function Display(props) {
     const [altResult, setAltResult] = useState('');
     const [altBase, setAltBase] = useState(16);
-    const [historyVisible, setHistoryVisible] = useState(false);
 
     useEffect(() => {
         setAltResult(convertBase(props.result, props.base, altBase));
@@ -111,11 +110,11 @@ export default function Display(props) {
     };
     
     const showHistory = () => {
-        setHistoryVisible(true);
+        props.setHistoryVisible(true);
     };
 
     const hideHistory = () => {
-        setHistoryVisible(false);
+        props.setHistoryVisible(false);
     };
 
     const clearHistory = () => {
@@ -149,7 +148,7 @@ export default function Display(props) {
 
     return (
         <View style={styles.display}>
-            {historyVisible ? 
+            {props.historyVisible ? 
                 (<History history={props.history} clearHistory={clearHistory} hideHistory={hideHistory} onItemPress={onHistoryItemPress}/>)
                 :
                 (<View style={{flex: 1}}>
